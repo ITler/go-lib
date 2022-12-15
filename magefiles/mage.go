@@ -28,10 +28,10 @@ type Deps mg.Namespace
 
 // Test run all tests
 func Test(ctx context.Context) error {
-	log.Info().Msg("Run lint and vet...")
-	mg.Deps(Code.Lint)
 	log.Info().Msg("Run unit tests...")
 	mg.Deps(Code.Test)
+	log.Info().Msg("Run lint and vet...")
+	mg.Deps(Code.Lint)
 	log.Info().Msg("...done\n")
 
 	return nil
