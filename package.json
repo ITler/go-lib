@@ -3,7 +3,7 @@
   "repository": "git@github.com:ITler/go-lib.git",
   "version": "0.1.0",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "test -n ${CI} || husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "17.3.0",
