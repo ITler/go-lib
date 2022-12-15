@@ -1,0 +1,46 @@
+name: release
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - name: Install npm packages
+        run: npm install && npm install
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.19.0'
+          check-latest: true
+          cache: true
+      - name: Install mage
+        uses: magefile/mage-action@v2
+        with:
+          version: latest
+      - name: Check for CI dependency installation routine
+        id: checkCiDeps
+        run: echo "task=$(/opt/hostedtoolcache/mage-action/*/x64/mage -l | grep -o deps:ci)" >> $GITHUB_OUTPUT
+      - name: Install CI dependencies with mage
+        if: ${{ steps.checkCiDeps.outputs.task == 'deps:ci' }}
+        uses: magefile/mage-action@v2
+        with:
+          version: latest
+          args: "deps:ci"
+      - name: Test with mage
+        uses: magefile/mage-action@v2
+        with:
+          version: latest
+          args: test
+      - name: Release
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: cycjimmy/semantic-release-action@v3
