@@ -3,8 +3,7 @@ package misc_test
 import (
 	"testing"
 
-	"github.com/signavio/core-bootstrap-sap/lib/misc"
-
+	"github.com/ITler/go-lib/misc"
 	"github.com/stretchr/testify/assert"
 )
 

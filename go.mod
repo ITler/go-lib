@@ -8,7 +8,6 @@ require (
 	github.com/go-playground/validator/v10 v10.11.1
 	github.com/magefile/mage v1.14.0
 	github.com/rs/zerolog v1.28.0
-	github.com/signavio/core-bootstrap-sap v1.1.158
 	github.com/stretchr/testify v1.8.1
 )
 
