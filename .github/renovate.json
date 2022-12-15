@@ -1,0 +1,17 @@
+{
+  "extends": ["config:base", "group:recommended"],
+  "prHourlyLimit": 10,
+  "rebaseWhen": "auto",
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchDatasources": ["orb"],
+      "labels": ["circleci-orb!!"],
+      "groupName": "circleci orb"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}
