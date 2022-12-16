@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ITler/go-lib/compare/v1.0.0...v1.1.0) (2022-12-16)
+
+
+### Features
+
+* **deps:** lock file maintenance ([3e1a126](https://github.com/ITler/go-lib/commit/3e1a12686339842449d49eca5815bad4962f059e))
+
 # 1.0.0 (2022-12-15)
 
 
