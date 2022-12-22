@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ITler/go-lib/compare/v1.1.0...v1.1.1) (2022-12-22)
+
+
+### Bug Fixes
+
+* semantic-release from pipeline ([725c2e0](https://github.com/ITler/go-lib/commit/725c2e08e78ead4a9c82bb063d198e3701aa6493))
+
 # [1.1.0](https://github.com/ITler/go-lib/compare/v1.0.0...v1.1.0) (2022-12-16)
 
 
