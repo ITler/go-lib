@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"strings"
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
@@ -22,7 +21,6 @@ type Installable interface {
 type Dependency struct {
 	Bin       string
 	GoInstall string
-	NoInstall bool
 }
 
 // Install will install the dependency
@@ -59,15 +57,13 @@ func CheckDependencies(ctx context.Context, dependencies ...*Dependency) error {
 func InstallDependencies(ctx context.Context, dependencies ...*Dependency) error {
 	for _, dep := range dependencies {
 		if dep.GoInstall != "" {
-			if err := sh.RunV(mg.GoCmd(), strings.Split("install "+dep.GoInstall, " ")...); err != nil {
+			if err := sh.RunV(mg.GoCmd(), "install", dep.GoInstall); err != nil {
 				return fmt.Errorf("Dependency cannot be installed - %w", err)
 			}
 			continue
 		}
 
-		if !dep.NoInstall {
-			log.Info().Msgf("Installation of '%s' will not be managed.", dep.Bin)
-		}
+		log.Warn().Msgf("Installation of '%s' needs to be handled, externally", dep.Bin)
 	}
 	return nil
 }

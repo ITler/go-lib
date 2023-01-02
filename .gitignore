@@ -3,3 +3,4 @@
 !commitlint.config.js
 node_modules
 /coverage.out
+*.temp
