@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/ITler/go-lib/compare/v1.2.0...v1.3.0) (2023-01-04)
+
+
+### Features
+
+* provide string dereference funtion ([25836a2](https://github.com/ITler/go-lib/commit/25836a2b7a80079358fa3f3c9f308cdcbce4ab46))
+
 # [1.2.0](https://github.com/ITler/go-lib/compare/v1.1.2...v1.2.0) (2023-01-04)
 
 
