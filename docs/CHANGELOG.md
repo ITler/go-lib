@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/ITler/go-lib/compare/v1.1.2...v1.2.0) (2023-01-04)
+
+
+### Features
+
+* add creating markdown syntax link ([a18ac53](https://github.com/ITler/go-lib/commit/a18ac53c06abf20b026e81c59e244c0871e8dc48))
+
 ## [1.1.2](https://github.com/ITler/go-lib/compare/v1.1.1...v1.1.2) (2023-01-02)
 
 
