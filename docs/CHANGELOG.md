@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/ITler/go-lib/compare/v1.3.0...v1.3.1) (2023-01-05)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/go-playground/locales to v0.14.1 ([be44a71](https://github.com/ITler/go-lib/commit/be44a71f7188c7f3363b61e4b2edae51a7444ac7))
+
 # [1.3.0](https://github.com/ITler/go-lib/compare/v1.2.0...v1.3.0) (2023-01-04)
 
 
