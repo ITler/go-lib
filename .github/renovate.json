@@ -20,7 +20,5 @@
     "automergeType": "pr",
     "platformAutomerge": true
   },
-  "postUpdateOptions": {
-    "gomodTidy": true
-  }
+  "postUpdateOptions": ["gomodTidy"]
 }
