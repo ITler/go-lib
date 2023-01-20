@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/ITler/go-lib/compare/v1.4.1...v1.4.2) (2023-01-20)
+
+
+### Bug Fixes
+
+* better handle optional parameters in API package ([f59f9e6](https://github.com/ITler/go-lib/commit/f59f9e656abb32be8d54c81b91c3ad524a2b9d3b))
+
 ## [1.4.1](https://github.com/ITler/go-lib/compare/v1.4.0...v1.4.1) (2023-01-20)
 
 
