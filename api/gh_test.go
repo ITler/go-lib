@@ -15,12 +15,12 @@ func TestNewGhClientTest(t *testing.T) {
 		tokenVar := api.WellKnownGithubTokenVarNames[0]
 		assert.NoError(t, os.Setenv(tokenVar, "123"), envError)
 		defer misc.GetAndUnsetEnv(tokenVar)
-		_, gotErr := api.NewGithubClient(nil, nil)
+		_, gotErr := api.NewGithubClient(nil)
 		assert.NoError(t, gotErr)
 
 	})
 	t.Run("fail Github client creation when oAuth client cannot be created", func(t *testing.T) {
-		_, gotErr := api.NewGithubClient(nil, nil)
+		_, gotErr := api.NewGithubClient(nil)
 		assert.Error(t, gotErr)
 	})
 }

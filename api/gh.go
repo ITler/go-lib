@@ -18,9 +18,9 @@ var (
 	WellKnownGithubTokenVarNames = []string{"GITHUB_TOKEN", "GH_TOKEN", "NPM_TOKEN"}
 )
 
-// GhClientCreationFunc defines the structure of a function,
+// GithubClientCreationFunc defines the structure of a function,
 // which is capable for creating an oauth2 client
-type GhClientCreationFunc func(*http.Client) (*github.Client, error)
+type GithubClientCreationFunc func(*http.Client) (*github.Client, error)
 
 // Queryable is able to query Github API and returns a data structure
 type Queryable interface {
@@ -68,9 +68,15 @@ func GetNewOpts(opts *github.SearchOptions, resp *github.Response) *github.Searc
 	return opts
 }
 
-// NewGithubClient creates a client connection to the Github API
+// NewGithubClient conveniently creates a client connection to the Github API
 // based on an already authenticated http client connection
-func NewGithubClient(authenticated *http.Client, gccf GhClientCreationFunc) (*github.Client, error) {
+//
+// If the authenticated client is not provided, a new client will be created
+// by calling [NewOAuthClient]
+//
+// Providing a parameter for gccf would allow creating the github client
+// with a customized function
+func NewGithubClient(authenticated *http.Client, gccf ...GithubClientCreationFunc) (*github.Client, error) {
 	if authenticated == nil {
 		client, err := NewOAuthClient(nil, nil, nil)
 		if err != nil {
@@ -78,11 +84,11 @@ func NewGithubClient(authenticated *http.Client, gccf GhClientCreationFunc) (*gi
 		}
 		authenticated = client.(*http.Client)
 	}
-	if gccf == nil {
-		gccf = NewGithubClientDefault
+	if len(gccf) == 0 || gccf[len(gccf)-1] == nil {
+		gccf = []GithubClientCreationFunc{NewGithubClientDefault}
 	}
 
-	return gccf(authenticated)
+	return gccf[len(gccf)-1](authenticated)
 }
 
 // NewGithubClientDefault provides a client connection to the Github API

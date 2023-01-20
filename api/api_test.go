@@ -37,7 +37,7 @@ func TestNewOAuthClient(t *testing.T) {
 		for _, e := range api.WellKnownGithubTokenVarNames {
 			assert.NoError(t, os.Setenv(e, "123"), envError)
 			defer misc.GetAndUnsetEnv(e)
-			_, gotErr := api.NewOAuthClient(nil, nil, nil)
+			_, gotErr := api.NewOAuthClient(nil, nil)
 			assert.NoError(t, gotErr)
 		}
 
@@ -46,7 +46,7 @@ func TestNewOAuthClient(t *testing.T) {
 		for _, e := range api.WellKnownGithubTokenVarNames {
 			misc.GetAndUnsetEnv(e)
 		}
-		_, gotErr := api.NewOAuthClient(nil, nil, nil)
+		_, gotErr := api.NewOAuthClient(nil, nil)
 		assert.Error(t, gotErr)
 	})
 
@@ -54,7 +54,7 @@ func TestNewOAuthClient(t *testing.T) {
 		for _, e := range api.WellKnownGithubTokenVarNames {
 			assert.NoError(t, os.Setenv(e, ""), envError)
 			defer misc.GetAndUnsetEnv(e)
-			_, gotErr := api.NewOAuthClient(nil, nil, nil)
+			_, gotErr := api.NewOAuthClient(nil, nil)
 			assert.Error(t, gotErr)
 		}
 
@@ -63,7 +63,7 @@ func TestNewOAuthClient(t *testing.T) {
 		input := api.EnvVarTokenProvider{
 			EnvvarNames: []string{},
 		}
-		_, gotErr := api.NewOAuthClient(nil, &input, nil)
+		_, gotErr := api.NewOAuthClient(nil, &input)
 		assert.Error(t, gotErr)
 	})
 	t.Run("ensure flexible creation procedure for oAuth2 http client", func(t *testing.T) {

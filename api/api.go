@@ -19,18 +19,18 @@ type HTTPClient interface{}
 type OAuth2ClientCreationFunc func(ctx context.Context, ts oauth2.TokenSource) (HTTPClient, error)
 
 // NewOAuthClient conveniently creates an oAuth2 client out of
-// the provided factory function referred by oaccf [OAuthClientCreationFunc] and
+// the provided factory function referred by oaccf [OAuth2ClientCreationFunc] and
 // by using a string token provided via stp [StringTokenProvider]
+//
+// If the provided context is empty, the context will be initialised
+// with [context.Background]
 //
 // If stp is not provided, the routine defaults to trying to retrieve
 // tokens from default environment variables determined by [WellKnownGithubTokenVarNames]
 //
 // Also if oaccf is not provided, the default oAuth2 client creation mechanism
-// is triggered via [NewDefaultOAuth2Client]
-//
-// if the provided context is empty, the context will be initialised
-// with [context.Background()]
-func NewOAuthClient(ctx context.Context, stp StringTokenProvider, oaccf OAuth2ClientCreationFunc) (HTTPClient, error) {
+// is triggered via [NewOAuthClientDefault]
+func NewOAuthClient(ctx context.Context, stp StringTokenProvider, oaccf ...OAuth2ClientCreationFunc) (HTTPClient, error) {
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -39,8 +39,9 @@ func NewOAuthClient(ctx context.Context, stp StringTokenProvider, oaccf OAuth2Cl
 			EnvvarNames: WellKnownGithubTokenVarNames,
 		}
 	}
-	if oaccf == nil {
-		oaccf = NewOAuthClientDefault
+
+	if len(oaccf) == 0 || oaccf[len(oaccf)-1] == nil {
+		oaccf = []OAuth2ClientCreationFunc{NewOAuthClientDefault}
 	}
 
 	token, err := stp.Parse()
@@ -48,11 +49,14 @@ func NewOAuthClient(ctx context.Context, stp StringTokenProvider, oaccf OAuth2Cl
 		return nil, err
 	}
 
-	return oaccf(ctx, NewOAuthStaticTokenSource(token))
+	return oaccf[len(oaccf)-1](ctx, NewOAuthStaticTokenSource(token))
 }
 
 // NewOAuthClientDefault creates a default oAuth2 client
 func NewOAuthClientDefault(ctx context.Context, ts oauth2.TokenSource) (HTTPClient, error) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
 	if ts == nil {
 		return nil, errors.New("No token source provided for oAuth2 client creation")
 	}
@@ -67,7 +71,7 @@ func NewOAuthClientDefault(ctx context.Context, ts oauth2.TokenSource) (HTTPClie
 }
 
 // NewOAuthStaticTokenSource conveniently creates a [oauth2.StaticTokenSource]
-// based on the provided token
+// based on the provided token, which must be non-empty
 func NewOAuthStaticTokenSource(token string) oauth2.TokenSource {
 	if token == "" {
 		return nil
