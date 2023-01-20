@@ -6,7 +6,7 @@ import (
 
 	"github.com/ITler/go-lib/api"
 	"github.com/ITler/go-lib/misc"
-	"github.com/google/go-github/v48/github"
+	"github.com/google/go-github/v49/github"
 	"github.com/stretchr/testify/assert"
 )
 
