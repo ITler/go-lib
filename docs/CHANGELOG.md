@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/ITler/go-lib/compare/v1.4.0...v1.4.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* update dep GH API to v49 ([fedf48e](https://github.com/ITler/go-lib/commit/fedf48e86ae31748607761eb5196921cef061f65))
+
 # [1.4.0](https://github.com/ITler/go-lib/compare/v1.3.1...v1.4.0) (2023-01-20)
 
 
