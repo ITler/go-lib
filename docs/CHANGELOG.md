@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/ITler/go-lib/compare/v1.3.1...v1.4.0) (2023-01-20)
+
+
+### Features
+
+* provide Github and oAuth API convenience ([b22cde3](https://github.com/ITler/go-lib/commit/b22cde34ff7de8f8ef4b1205db256f9255e2c647))
+
 ## [1.3.1](https://github.com/ITler/go-lib/compare/v1.3.0...v1.3.1) (2023-01-05)
 
 
