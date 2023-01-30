@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/ITler/go-lib/compare/v1.4.3...v1.4.4) (2023-01-30)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/go-playground/universal-translator to v0.18.1 ([02c65f7](https://github.com/ITler/go-lib/commit/02c65f7fe4d1beeb03acf9c4be220de7790d8e1c))
+
 ## [1.4.3](https://github.com/ITler/go-lib/compare/v1.4.2...v1.4.3) (2023-01-26)
 
 
