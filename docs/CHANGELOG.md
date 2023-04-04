@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/ITler/go-lib/compare/v1.4.9...v1.5.0) (2023-04-04)
+
+
+### Features
+
+* reorg api pkg, improve naming, tests and docs ([43d45ce](https://github.com/ITler/go-lib/commit/43d45ce0c057d03b5d2690e8af1ce9a9ee4cc672))
+
 ## [1.4.9](https://github.com/ITler/go-lib/compare/v1.4.8...v1.4.9) (2023-03-20)
 
 
