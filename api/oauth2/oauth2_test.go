@@ -1,17 +1,20 @@
-package api_test
+package oauth2_test
 
 import (
 	"context"
 	"errors"
+	"net/url"
 	"os"
 	"testing"
 
 	"github.com/ITler/go-lib/api"
+	"github.com/ITler/go-lib/api/gh"
+	"github.com/ITler/go-lib/api/oauth2"
 	"github.com/ITler/go-lib/misc"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/oauth2"
+	goauth2 "golang.org/x/oauth2"
 )
 
 func init() {
@@ -25,56 +28,89 @@ const (
 
 type HTTPTestClient struct {
 	ctx context.Context
-	ts  oauth2.TokenSource
+	ts  goauth2.TokenSource
 }
 
-func (o HTTPTestClient) Token() (*oauth2.Token, error) {
+func (o HTTPTestClient) Token() (*goauth2.Token, error) {
 	return nil, errors.New("some fail")
 }
 
+func TestLearnGitDownload(t *testing.T) {
+
+	// tmpDir, err := os.MkdirTemp("", "*-"+strings.ReplaceAll(path.Dir(""), "/", "-"))
+	// if err != nil {
+	// 	t.Logf("Creating temp dir for file download failed: %s", err)
+	// }
+	// t.Logf("%v", tmpDir)
+	// defer func() {
+	// 	if err := os.RemoveAll(tmpDir); err != nil {
+	// 		t.Logf("Temp dir '%s' cannot be removed: %s", tmpDir, err)
+	// 	}
+	// }()
+	// c, err := api.NewGithubClient(nil)
+	// assert.NoError(t, err)
+	// u, _, err2 := c.Repositories.GetArchiveLink(context.Background(), "signavio", "cloud-facts-finder", github.Tarball, &github.RepositoryContentGetOptions{
+	// 	Ref: "",
+	// }, true)
+	// t.Logf("%#v", u.String())
+	u, err2 := url.Parse("http://foo.com/baz.txt")
+	t.Logf("%#v", u.String())
+	assert.NoError(t, err2)
+}
+
 func TestNewOAuthClient(t *testing.T) {
+	validStp := &api.EnvVarTokenProvider{
+		EnvvarNames: gh.WellKnownTokenVarNames,
+	}
 	t.Run("happy path not failing with valid token env var defined", func(t *testing.T) {
-		for _, e := range api.WellKnownGithubTokenVarNames {
+		for _, e := range gh.WellKnownTokenVarNames {
 			assert.NoError(t, os.Setenv(e, "123"), envError)
 			defer misc.GetAndUnsetEnv(e)
-			_, gotErr := api.NewOAuthClient(nil, nil)
+			_, gotErr := oauth2.NewClient(nil, validStp)
 			assert.NoError(t, gotErr)
 		}
 
 	})
 	t.Run("fail when no token env var is defined", func(t *testing.T) {
-		for _, e := range api.WellKnownGithubTokenVarNames {
+		for _, e := range gh.WellKnownTokenVarNames {
 			misc.GetAndUnsetEnv(e)
 		}
-		_, gotErr := api.NewOAuthClient(nil, nil)
+		_, gotErr := oauth2.NewClient(nil, validStp)
 		assert.Error(t, gotErr)
 	})
 
 	t.Run("fail when invalid token env var defined", func(t *testing.T) {
-		for _, e := range api.WellKnownGithubTokenVarNames {
+		for _, e := range gh.WellKnownTokenVarNames {
 			assert.NoError(t, os.Setenv(e, ""), envError)
 			defer misc.GetAndUnsetEnv(e)
-			_, gotErr := api.NewOAuthClient(nil, nil)
+			_, gotErr := oauth2.NewClient(nil, validStp)
 			assert.Error(t, gotErr)
 		}
 
 	})
+
 	t.Run("fail on invalid envvar token provider", func(t *testing.T) {
 		input := api.EnvVarTokenProvider{
 			EnvvarNames: []string{},
 		}
-		_, gotErr := api.NewOAuthClient(nil, &input)
+		_, gotErr := oauth2.NewClient(nil, &input)
 		assert.Error(t, gotErr)
 	})
+
+	t.Run("fail on no token provider at all", func(t *testing.T) {
+		_, gotErr := oauth2.NewClient(nil, nil)
+		assert.Error(t, gotErr)
+	})
+
 	t.Run("ensure flexible creation procedure for oAuth2 http client", func(t *testing.T) {
-		oaccf := func(ctx context.Context, ts oauth2.TokenSource) (api.HTTPClient, error) {
+		oaccf := func(ctx context.Context, ts goauth2.TokenSource) (api.HTTPClient, error) {
 			return &HTTPTestClient{
 				ctx: ctx,
 				ts:  ts,
 			}, nil
 		}
 		testToken := "123"
-		gotRaw, _ := api.NewOAuthClient(nil, api.StringToken(testToken), oaccf)
+		gotRaw, _ := oauth2.NewClient(nil, api.StringToken(testToken), oaccf)
 		got, errC := gotRaw.(*HTTPTestClient)
 		assert.True(t, errC)
 		token, _ := got.ts.Token()
@@ -87,24 +123,24 @@ func TestNewOAuthClient(t *testing.T) {
 func TestNewOAuthClientDefault(t *testing.T) {
 	t.Run("happy path not failing with valid token env var defined", func(t *testing.T) {
 		t.Skip()
-		for _, e := range api.WellKnownGithubTokenVarNames {
+		for _, e := range gh.WellKnownTokenVarNames {
 			assert.NoError(t, os.Setenv(e, "123"), envError)
-			_, gotErr := api.NewOAuthClientDefault(nil, nil)
+			_, gotErr := oauth2.NewClientDefault(nil, nil)
 			defer misc.GetAndUnsetEnv(e)
 			assert.NoError(t, gotErr)
 		}
 
 	})
 	t.Run("fail when no valid token was provided", func(t *testing.T) {
-		_, gotErr := api.NewOAuthClientDefault(nil, oauth2.StaticTokenSource(
-			&oauth2.Token{AccessToken: ""}))
+		_, gotErr := oauth2.NewClientDefault(nil, goauth2.StaticTokenSource(
+			&goauth2.Token{AccessToken: ""}))
 		assert.Error(t, gotErr)
 	})
 	t.Run("fail on failing token source", func(t *testing.T) {
-		for _, e := range api.WellKnownGithubTokenVarNames {
+		for _, e := range gh.WellKnownTokenVarNames {
 			misc.GetAndUnsetEnv(e)
 		}
-		_, gotErr := api.NewOAuthClientDefault(nil, &HTTPTestClient{})
+		_, gotErr := oauth2.NewClientDefault(nil, &HTTPTestClient{})
 		assert.Error(t, gotErr)
 	})
 }

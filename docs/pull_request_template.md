@@ -6,7 +6,6 @@
 >
 > - [ ] refer to a valid ticket id in the PR title (if applicable)
 > - [ ] use proper [Angular commit format] for semantic release
-> - [ ] provide a brief summary for the proposed changes here,
->       to a failing service
+> - [ ] provide a brief summary for the proposed changes below
 
 ## Summary

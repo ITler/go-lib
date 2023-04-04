@@ -1,3 +1,5 @@
+// Package api encapsulates convenience functionality for interacting
+// with well known APIs and related authentication mechanisms
 package api
 
 import (
