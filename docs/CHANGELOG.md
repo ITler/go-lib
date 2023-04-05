@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/ITler/go-lib/compare/v1.5.0...v1.5.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* rename conversion module to deref ([8def3a3](https://github.com/ITler/go-lib/commit/8def3a31a1368963fdfef0f505f26eb2b8bf665e))
+
 # [1.5.0](https://github.com/ITler/go-lib/compare/v1.4.9...v1.5.0) (2023-04-04)
 
 
