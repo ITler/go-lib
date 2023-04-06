@@ -1,18 +1,12 @@
 package gh
 
 import (
-	"context"
 	"errors"
 	"net/http"
 
 	"github.com/ITler/go-lib/api"
 	"github.com/ITler/go-lib/api/oauth2"
 	"github.com/google/go-github/v49/github"
-)
-
-const (
-	// PerPageResultsDefault defines the default page size for search query responses
-	PerPageResultsDefault = 100
 )
 
 var (
@@ -23,11 +17,6 @@ var (
 // ClientCreationFunc defines the structure of a function,
 // which is capable for creating an oauth2 client
 type ClientCreationFunc func(*http.Client) (*github.Client, error)
-
-// Queryable is able to query Github API and returns a data structure
-type Queryable interface {
-	Query(context.Context, *github.Client) (interface{}, error)
-}
 
 // NewClient conveniently creates a client connection to the Github API
 // based on an already authenticated http client connection

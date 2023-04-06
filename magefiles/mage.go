@@ -61,16 +61,7 @@ func (Code) Test(ctx context.Context) error {
 
 // Ci installs dependencies in a quick way, suitable for temporary pipeline runners
 func (Deps) Ci(ctx context.Context) error {
-	for _, dep := range externalDependencies {
-		installed, err := dep.Install(ctx)
-		if err != nil {
-			return err
-		}
-		if installed {
-			log.Info().Msgf("Dependency '%s' installed", dep.Bin)
-		}
-	}
-	return nil
+	return deps.InstallDependencies(ctx, externalDependencies...)
 }
 
 func init() {

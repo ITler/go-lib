@@ -58,12 +58,13 @@ func InstallDependencies(ctx context.Context, dependencies ...*Dependency) error
 	for _, dep := range dependencies {
 		if dep.GoInstall != "" {
 			if err := sh.RunV(mg.GoCmd(), "install", dep.GoInstall); err != nil {
-				return fmt.Errorf("Dependency cannot be installed - %w", err)
+				return fmt.Errorf("Dependency cannot be installed: %w", err)
 			}
 			continue
 		}
 
-		log.Warn().Msgf("Installation of '%s' needs to be handled, externally", dep.Bin)
+		log.Warn().Msgf("Installation of '%s' not supported, yet. "+
+			"Thus installation needs to be handled, externally", dep.Bin)
 	}
 	return nil
 }
