@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/ITler/go-lib/compare/v1.5.2...v1.5.3) (2023-04-06)
+
+
+### Bug Fixes
+
+* more cleanup for GH api pkg and mage lib ([34ad9b6](https://github.com/ITler/go-lib/commit/34ad9b681a2ff8361025a40d7c7d5ed93c36b8d2))
+
 ## [1.5.2](https://github.com/ITler/go-lib/compare/v1.5.1...v1.5.2) (2023-04-06)
 
 
