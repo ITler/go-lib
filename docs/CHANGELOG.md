@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/ITler/go-lib/compare/v1.5.1...v1.5.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* remove deprecated GH opts handling ([6d2c9a6](https://github.com/ITler/go-lib/commit/6d2c9a69e1e3c109c119ce55987c506dd5cbb96d))
+
 ## [1.5.1](https://github.com/ITler/go-lib/compare/v1.5.0...v1.5.1) (2023-04-05)
 
 
