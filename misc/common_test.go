@@ -3,7 +3,7 @@ package misc_test
 import (
 	"testing"
 
-	"github.com/ITler/go-lib/misc"
+	"github.com/itler/go-lib/misc"
 	"github.com/stretchr/testify/assert"
 )
 

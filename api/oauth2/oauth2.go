@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ITler/go-lib/api"
+	"github.com/itler/go-lib/api"
 	goauth2 "golang.org/x/oauth2"
 )
 

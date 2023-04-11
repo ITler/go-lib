@@ -3,7 +3,7 @@ package deref_test
 import (
 	"testing"
 
-	"github.com/ITler/go-lib/deref"
+	"github.com/itler/go-lib/deref"
 	"github.com/stretchr/testify/assert"
 )
 

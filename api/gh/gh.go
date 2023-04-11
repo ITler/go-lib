@@ -4,9 +4,9 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/ITler/go-lib/api"
-	"github.com/ITler/go-lib/api/oauth2"
 	"github.com/google/go-github/v49/github"
+	"github.com/itler/go-lib/api"
+	"github.com/itler/go-lib/api/oauth2"
 )
 
 var (

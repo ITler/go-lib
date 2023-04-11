@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ITler/go-lib/api/gh"
-	"github.com/ITler/go-lib/misc"
+	"github.com/itler/go-lib/api/gh"
+	"github.com/itler/go-lib/misc"
 	"github.com/stretchr/testify/assert"
 )
 

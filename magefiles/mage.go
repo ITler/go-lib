@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ITler/go-lib/magefiles/deps"
+	"github.com/itler/go-lib/magefiles/deps"
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
 	"github.com/rs/zerolog"

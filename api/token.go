@@ -5,7 +5,7 @@ package api
 import (
 	"fmt"
 
-	"github.com/ITler/go-lib/misc"
+	"github.com/itler/go-lib/misc"
 	"github.com/rs/zerolog/log"
 )
 
