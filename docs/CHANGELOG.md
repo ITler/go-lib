@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/ITler/go-lib/compare/v1.5.4...v1.5.5) (2023-04-11)
+
+
+### Bug Fixes
+
+* align module name with go best practices ([e11186d](https://github.com/ITler/go-lib/commit/e11186ddf29cdd798c7dd9e3e04397d6c013c56f))
+
 ## [1.5.4](https://github.com/ITler/go-lib/compare/v1.5.3...v1.5.4) (2023-04-07)
 
 
