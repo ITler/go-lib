@@ -1,3 +1,10 @@
+## [1.5.7](https://github.com/ITler/go-lib/compare/v1.5.6...v1.5.7) (2023-04-14)
+
+
+### Bug Fixes
+
+* provide module for working with references ([d328350](https://github.com/ITler/go-lib/commit/d328350c1de973e60ffa7e43fb3c15db44880449))
+
 ## [1.5.6](https://github.com/ITler/go-lib/compare/v1.5.5...v1.5.6) (2023-04-13)
 
 
