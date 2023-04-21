@@ -1,6 +1,10 @@
 package deps
 
 var (
+	// Docker describes the docker dependency
+	Docker = &Dependency{
+		Bin: "docker",
+	}
 	// Golint describes the golint dependency
 	Golint = &Dependency{
 		Bin:       "golint",

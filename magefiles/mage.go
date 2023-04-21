@@ -43,20 +43,12 @@ func (Code) Lint(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	err = sh.RunV(mg.GoCmd(), strings.Split("vet ./...", " ")...)
-	if err != nil {
-		return err
-	}
-	return nil
+	return sh.RunV(mg.GoCmd(), strings.Split("vet ./...", " ")...)
 }
 
 // Test validates static site configuration
 func (Code) Test(ctx context.Context) error {
-	err := sh.RunV(mg.GoCmd(), strings.Split("test ./... -short -v -race -coverprofile=coverage.out -covermode=atomic -tags=\"\"", " ")...)
-	if err != nil {
-		return err
-	}
-	return nil
+	return sh.RunV(mg.GoCmd(), strings.Split("test ./... -short -v -race -coverprofile=coverage.out -covermode=atomic -tags=\"\"", " ")...)
 }
 
 // Ci installs dependencies in a quick way, suitable for temporary pipeline runners
