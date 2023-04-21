@@ -1,3 +1,10 @@
+## [1.5.8](https://github.com/ITler/go-lib/compare/v1.5.7...v1.5.8) (2023-04-21)
+
+
+### Bug Fixes
+
+* make ref magic generic and move to misc package ([5578db6](https://github.com/ITler/go-lib/commit/5578db62c4c931716b247fe00e6e37fe465563ea))
+
 ## [1.5.7](https://github.com/ITler/go-lib/compare/v1.5.6...v1.5.7) (2023-04-14)
 
 
