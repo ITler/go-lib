@@ -1,3 +1,10 @@
+## [1.5.9](https://github.com/ITler/go-lib/compare/v1.5.8...v1.5.9) (2023-04-21)
+
+
+### Bug Fixes
+
+* rename misc to ease ([da2f7da](https://github.com/ITler/go-lib/commit/da2f7daedb929536cb0d6ad08843c2e32858f385))
+
 ## [1.5.8](https://github.com/ITler/go-lib/compare/v1.5.7...v1.5.8) (2023-04-21)
 
 
