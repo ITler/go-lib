@@ -1,3 +1,10 @@
+## [1.5.10](https://github.com/ITler/go-lib/compare/v1.5.9...v1.5.10) (2023-04-21)
+
+
+### Bug Fixes
+
+* add docker to mage known dependencies ([af0ddaa](https://github.com/ITler/go-lib/commit/af0ddaa9a4e858637eba075813249ce518217e77))
+
 ## [1.5.9](https://github.com/ITler/go-lib/compare/v1.5.8...v1.5.9) (2023-04-21)
 
 
