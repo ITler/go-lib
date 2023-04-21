@@ -10,7 +10,7 @@ import (
 	"github.com/itler/go-lib/api"
 	"github.com/itler/go-lib/api/gh"
 	"github.com/itler/go-lib/api/oauth2"
-	"github.com/itler/go-lib/misc"
+	"github.com/itler/go-lib/ease"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/assert"
@@ -65,7 +65,7 @@ func TestNewOAuthClient(t *testing.T) {
 	t.Run("happy path not failing with valid token env var defined", func(t *testing.T) {
 		for _, e := range gh.WellKnownTokenVarNames {
 			assert.NoError(t, os.Setenv(e, "123"), envError)
-			defer misc.GetAndUnsetEnv(e)
+			defer ease.GetAndUnsetEnv(e)
 			_, gotErr := oauth2.NewClient(nil, validStp)
 			assert.NoError(t, gotErr)
 		}
@@ -73,7 +73,7 @@ func TestNewOAuthClient(t *testing.T) {
 	})
 	t.Run("fail when no token env var is defined", func(t *testing.T) {
 		for _, e := range gh.WellKnownTokenVarNames {
-			misc.GetAndUnsetEnv(e)
+			ease.GetAndUnsetEnv(e)
 		}
 		_, gotErr := oauth2.NewClient(nil, validStp)
 		assert.Error(t, gotErr)
@@ -82,7 +82,7 @@ func TestNewOAuthClient(t *testing.T) {
 	t.Run("fail when invalid token env var defined", func(t *testing.T) {
 		for _, e := range gh.WellKnownTokenVarNames {
 			assert.NoError(t, os.Setenv(e, ""), envError)
-			defer misc.GetAndUnsetEnv(e)
+			defer ease.GetAndUnsetEnv(e)
 			_, gotErr := oauth2.NewClient(nil, validStp)
 			assert.Error(t, gotErr)
 		}
@@ -126,7 +126,7 @@ func TestNewOAuthClientDefault(t *testing.T) {
 		for _, e := range gh.WellKnownTokenVarNames {
 			assert.NoError(t, os.Setenv(e, "123"), envError)
 			_, gotErr := oauth2.NewClientDefault(nil, nil)
-			defer misc.GetAndUnsetEnv(e)
+			defer ease.GetAndUnsetEnv(e)
 			assert.NoError(t, gotErr)
 		}
 
@@ -138,7 +138,7 @@ func TestNewOAuthClientDefault(t *testing.T) {
 	})
 	t.Run("fail on failing token source", func(t *testing.T) {
 		for _, e := range gh.WellKnownTokenVarNames {
-			misc.GetAndUnsetEnv(e)
+			ease.GetAndUnsetEnv(e)
 		}
 		_, gotErr := oauth2.NewClientDefault(nil, &HTTPTestClient{})
 		assert.Error(t, gotErr)

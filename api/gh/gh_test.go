@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/itler/go-lib/api/gh"
-	"github.com/itler/go-lib/misc"
+	"github.com/itler/go-lib/ease"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,7 +17,7 @@ func TestNewGhClient(t *testing.T) {
 	t.Run("fail Github client creation when default oAuth client cannot be created",
 		func(t *testing.T) {
 			for _, key := range gh.WellKnownTokenVarNames {
-				misc.GetAndUnsetEnv(key)
+				ease.GetAndUnsetEnv(key)
 			}
 			_, gotErr := gh.NewClient(nil)
 			assert.Error(t, gotErr)
@@ -26,7 +26,7 @@ func TestNewGhClient(t *testing.T) {
 		func(t *testing.T) {
 			tokenVar := gh.WellKnownTokenVarNames[0]
 			assert.NoError(t, os.Setenv(tokenVar, "123"), envError)
-			defer misc.GetAndUnsetEnv(tokenVar)
+			defer ease.GetAndUnsetEnv(tokenVar)
 			_, gotErr := gh.NewClient(nil)
 			assert.NoError(t, gotErr)
 

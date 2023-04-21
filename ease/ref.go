@@ -1,4 +1,4 @@
-package misc
+package ease
 
 // Ref obtains a pointer to the provided value
 func Ref[T any](in T) *T {

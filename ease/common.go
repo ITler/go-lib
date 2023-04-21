@@ -1,4 +1,4 @@
-package misc
+package ease
 
 import (
 	"encoding/json"

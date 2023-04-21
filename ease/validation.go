@@ -1,4 +1,4 @@
-package misc
+package ease
 
 import (
 	ut "github.com/go-playground/universal-translator"

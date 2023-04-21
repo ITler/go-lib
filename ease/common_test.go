@@ -1,9 +1,9 @@
-package misc_test
+package ease_test
 
 import (
 	"testing"
 
-	"github.com/itler/go-lib/misc"
+	"github.com/itler/go-lib/ease"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -58,9 +58,9 @@ func TestStringJoinWithoutEmpties(t *testing.T) {
 		},
 	}
 	for num, tt := range tests {
-		assert.Equal(t, tt.want, misc.StringJoinWithoutEmpties(tt.value, tt.sep, false),
+		assert.Equal(t, tt.want, ease.StringJoinWithoutEmpties(tt.value, tt.sep, false),
 			"test case %d/%d - input: %#v", num, len(tests)-1, tt.value)
-		assert.Equalf(t, tt.wantKeepSpaces, misc.StringJoinWithoutEmpties(tt.value, tt.sep, true),
+		assert.Equalf(t, tt.wantKeepSpaces, ease.StringJoinWithoutEmpties(tt.value, tt.sep, true),
 			"test case %d/%d - input: %#v", num, len(tests)-1, tt.value)
 	}
 }
@@ -126,14 +126,14 @@ func TestEnrichMapStringInterface(t *testing.T) {
 		},
 		"array": []int{0, 1, 2},
 	}
-	actual, err := misc.FlatMergeMapStringInterface(base, additions)
+	actual, err := ease.FlatMergeMapStringInterface(base, additions)
 	assert.NoError(t, err, "Should only fail on missing implementation")
 	assert.Equal(t, expected, actual, "Should match expectation")
 
 	additions["unsupported_structt"] = struct{ s string }{
 		s: "fail",
 	}
-	actual, err = misc.FlatMergeMapStringInterface(base, additions)
+	actual, err = ease.FlatMergeMapStringInterface(base, additions)
 	assert.Errorf(t, err, "Should fail on unsupported implementation: %#v", actual)
 }
 
@@ -159,7 +159,7 @@ func TestStructToMapStringInterface(t *testing.T) {
 		},
 	}
 
-	actual := misc.StructToMapStringInterface(testStruct)
+	actual := ease.StructToMapStringInterface(testStruct)
 	assert.Equalf(t, expected, actual,
 		"Returned map should match expectation, but got: %#v", actual)
 }
@@ -184,6 +184,6 @@ func TestUpcaseFirstStrict(t *testing.T) {
 	}
 
 	for num, test := range tests {
-		assert.Equalf(t, test.expected, misc.UpcaseFirstStrict(test.in), "Test #%s", num)
+		assert.Equalf(t, test.expected, ease.UpcaseFirstStrict(test.in), "Test #%s", num)
 	}
 }

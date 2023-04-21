@@ -5,7 +5,7 @@ package api
 import (
 	"fmt"
 
-	"github.com/itler/go-lib/misc"
+	"github.com/itler/go-lib/ease"
 	"github.com/rs/zerolog/log"
 )
 
@@ -40,7 +40,7 @@ func parseEnvvars(envvarNames []string) (string, error) {
 	for _, candidate := range envvarNames {
 		if candidate != "" {
 			envvarName = candidate
-			token = misc.LookupEnvVar(envvarName)
+			token = ease.LookupEnvVar(envvarName)
 		}
 		if token != "" {
 			log.Debug().Msgf("Found token in env var '%s'", envvarName)
