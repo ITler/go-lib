@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/itler/go-lib/magefiles/deps"
+
+	"github.com/itler/go-lib/magefiles/run/golang"
 	"github.com/magefile/mage/mg"
-	"github.com/magefile/mage/sh"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -39,16 +39,16 @@ func Test(ctx context.Context) error {
 
 // Lint validates static site configuration
 func (Code) Lint(ctx context.Context) error {
-	err := sh.RunV(deps.Golint.Bin, strings.Split("-set_exit_status ./...", " ")...)
+	err := golang.GoLintDefault()
 	if err != nil {
 		return err
 	}
-	return sh.RunV(mg.GoCmd(), strings.Split("vet ./...", " ")...)
+	return golang.GoVetDefault()
 }
 
 // Test validates static site configuration
 func (Code) Test(ctx context.Context) error {
-	return sh.RunV(mg.GoCmd(), strings.Split("test ./... -short -v -race -coverprofile=coverage.out -covermode=atomic -tags=\"\"", " ")...)
+	return golang.GoTestDefault()
 }
 
 // Ci installs dependencies in a quick way, suitable for temporary pipeline runners
