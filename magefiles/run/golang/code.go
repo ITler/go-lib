@@ -25,18 +25,29 @@ func GenerateVektraMocks() error {
 
 }
 
-// RunLintDefault runs go lint for all modules
-func RunLintDefault() error {
+// RunBuildBinary triggers go build for main package in repository root
+func RunBuildBinary(binName string) error {
+	return RunBuildBinaryFromDir(binName, ".")
+}
+
+// RunBuildBinaryFromDir triggers go build for package in specified dir
+func RunBuildBinaryFromDir(binName, dir string) error {
+	return sh.RunV(mg.GoCmd(), "build", "-o", binName,
+		"-ldflags", "-w", "-ldflags", "-s", dir)
+}
+
+// RunLint runs go lint for all modules
+func RunLint() error {
 	return sh.RunV(deps.Golint.Bin, strings.Split("-set_exit_status ./...", " ")...)
 }
 
-// RunTestDefault runs go test for all modules
-func RunTestDefault() error {
+// RunTest runs go test for all modules
+func RunTest() error {
 	return sh.RunV(mg.GoCmd(), "test", "./...", "-short", "-v", "-race",
 		"-coverprofile=coverage.out", "-covermode=atomic", "-tags=\"\"")
 }
 
-// RunVetDefault runs go vet for all modules
-func RunVetDefault() error {
+// RunVet runs go vet for all modules
+func RunVet() error {
 	return sh.RunV(mg.GoCmd(), "vet", "./...")
 }

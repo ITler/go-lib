@@ -39,16 +39,16 @@ func Test(ctx context.Context) error {
 
 // Lint validates static site configuration
 func (Code) Lint(ctx context.Context) error {
-	err := golang.RunLintDefault()
+	err := golang.RunLint()
 	if err != nil {
 		return err
 	}
-	return golang.RunVetDefault()
+	return golang.RunVet()
 }
 
 // Test validates static site configuration
 func (Code) Test(ctx context.Context) error {
-	return golang.RunTestDefault()
+	return golang.RunTest()
 }
 
 // Ci installs dependencies in a quick way, suitable for temporary pipeline runners
