@@ -1,3 +1,10 @@
+## [1.5.13](https://github.com/ITler/go-lib/compare/v1.5.12...v1.5.13) (2023-05-09)
+
+
+### Bug Fixes
+
+* better name golang run functions ([becb69d](https://github.com/ITler/go-lib/commit/becb69dc6cdd45d22deba7a8d2a093a4fe2225eb))
+
 ## [1.5.12](https://github.com/ITler/go-lib/compare/v1.5.11...v1.5.12) (2023-05-09)
 
 
