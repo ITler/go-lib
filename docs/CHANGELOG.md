@@ -1,3 +1,10 @@
+## [1.5.12](https://github.com/ITler/go-lib/compare/v1.5.11...v1.5.12) (2023-05-09)
+
+
+### Bug Fixes
+
+* generalize lint, vet, test and mock creation ([03a23c5](https://github.com/ITler/go-lib/commit/03a23c571e17cab75764226764141836edd75726))
+
 ## [1.5.11](https://github.com/ITler/go-lib/compare/v1.5.10...v1.5.11) (2023-04-29)
 
 
