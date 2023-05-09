@@ -25,18 +25,18 @@ func GenerateVektraMocks() error {
 
 }
 
-// GoLintDefault runs go lint for all modules
-func GoLintDefault() error {
+// RunLintDefault runs go lint for all modules
+func RunLintDefault() error {
 	return sh.RunV(deps.Golint.Bin, strings.Split("-set_exit_status ./...", " ")...)
 }
 
-// GoTestDefault runs go test for all modules
-func GoTestDefault() error {
+// RunTestDefault runs go test for all modules
+func RunTestDefault() error {
 	return sh.RunV(mg.GoCmd(), "test", "./...", "-short", "-v", "-race",
 		"-coverprofile=coverage.out", "-covermode=atomic", "-tags=\"\"")
 }
 
-// GoVetDefault runs go vet for all modules
-func GoVetDefault() error {
+// RunVetDefault runs go vet for all modules
+func RunVetDefault() error {
 	return sh.RunV(mg.GoCmd(), "vet", "./...")
 }
