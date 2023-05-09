@@ -1,3 +1,10 @@
+## [1.5.14](https://github.com/ITler/go-lib/compare/v1.5.13...v1.5.14) (2023-05-09)
+
+
+### Bug Fixes
+
+* define run command for go build ([386652c](https://github.com/ITler/go-lib/commit/386652c081f229fd73bc3c0aebd91ade710dbd48))
+
 ## [1.5.13](https://github.com/ITler/go-lib/compare/v1.5.12...v1.5.13) (2023-05-09)
 
 
