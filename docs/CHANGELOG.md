@@ -1,3 +1,10 @@
+## [1.5.17](https://github.com/ITler/go-lib/compare/v1.5.16...v1.5.17) (2023-05-10)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/google/go-github/v49 to v52 ([8181564](https://github.com/ITler/go-lib/commit/8181564161805fce2f5f7bbc68d6b2ce6daf1fde))
+
 ## [1.5.16](https://github.com/ITler/go-lib/compare/v1.5.15...v1.5.16) (2023-05-10)
 
 
