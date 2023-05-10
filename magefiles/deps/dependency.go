@@ -9,7 +9,14 @@ import (
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
-	"github.com/rs/zerolog/log"
+)
+
+var (
+	// ExternalDependencies define the external app dependencies needed
+	// to fullfill all automation tasks
+	ExternalDependencies = []*Dependency{
+		Golint,
+	}
 )
 
 // Installable describes something that can be installed
@@ -27,9 +34,7 @@ type Dependency struct {
 func (d *Dependency) Install(ctx context.Context) (result bool, err error) {
 	if err = CheckDependencies(ctx, d); err != nil {
 		if os.IsNotExist(err) {
-			if err = InstallDependencies(ctx, d); err != nil {
-				return false, err
-			}
+			return InstallDependencies(ctx, d)
 		}
 		return true, nil
 	}
@@ -39,32 +44,40 @@ func (d *Dependency) Install(ctx context.Context) (result bool, err error) {
 // CheckDependencies determines if provided dependencies are available.
 // If binary is not available [os.ErrNotExist] is returned
 func CheckDependencies(ctx context.Context, dependencies ...*Dependency) error {
+	if dependencies == nil || len(dependencies) == 0 {
+		dependencies = ExternalDependencies
+	}
 	for _, dep := range dependencies {
 		if _, err := exec.LookPath(dep.Bin); err != nil {
 			if errors.Is(err, exec.ErrNotFound) {
 				return &os.PathError{
-					Op:   "",
 					Path: dep.Bin,
 					Err:  os.ErrNotExist,
 				}
 			}
+			return err
 		}
 	}
 	return nil
 }
 
 // InstallDependencies makes sure to install provided dependencies
-func InstallDependencies(ctx context.Context, dependencies ...*Dependency) error {
+// and return if all installing all dependencies were successful
+func InstallDependencies(ctx context.Context, dependencies ...*Dependency) (bool, error) {
+	var warnings error
+	if dependencies == nil || len(dependencies) == 0 {
+		dependencies = ExternalDependencies
+	}
 	for _, dep := range dependencies {
 		if dep.GoInstall != "" {
 			if err := sh.RunV(mg.GoCmd(), "install", dep.GoInstall); err != nil {
-				return fmt.Errorf("Dependency cannot be installed: %w", err)
+				return false, fmt.Errorf("Dependency cannot be installed: %w", err)
 			}
 			continue
 		}
 
-		log.Warn().Msgf("Installation of '%s' not supported, yet. "+
-			"Thus installation needs to be handled, externally", dep.Bin)
+		warnings = errors.Join(warnings, fmt.Errorf("Installation of '%s' not supported, yet. "+
+			"Thus installation needs to be handled, externally", dep.Bin))
 	}
-	return nil
+	return true, warnings
 }

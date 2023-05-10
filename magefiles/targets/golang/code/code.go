@@ -1,4 +1,4 @@
-package golang
+package code
 
 import (
 	"fmt"
@@ -9,8 +9,19 @@ import (
 	"github.com/magefile/mage/sh"
 )
 
-// GenerateVektraMocks creates mock files via vektra/mockery
-func GenerateVektraMocks() error {
+// BuildBinary triggers go build for main package in repository root
+func BuildBinary(name string) error {
+	return BuildBinaryFromDir(name, ".")
+}
+
+// BuildBinaryFromDir triggers go build for package in specified dir
+func BuildBinaryFromDir(name, dir string) error {
+	return sh.RunV(mg.GoCmd(), "build", "-o", name,
+		"-ldflags", "-w", "-ldflags", "-s", dir)
+}
+
+// GenerateMocks creates mock code via vektra/mockery
+func GenerateMocks() error {
 	userID, err := sh.Output("id", "-u")
 	if err != nil {
 		return fmt.Errorf("Unable to determine users id: %w", err)
@@ -25,29 +36,18 @@ func GenerateVektraMocks() error {
 
 }
 
-// RunBuildBinary triggers go build for main package in repository root
-func RunBuildBinary(binName string) error {
-	return RunBuildBinaryFromDir(binName, ".")
-}
-
-// RunBuildBinaryFromDir triggers go build for package in specified dir
-func RunBuildBinaryFromDir(binName, dir string) error {
-	return sh.RunV(mg.GoCmd(), "build", "-o", binName,
-		"-ldflags", "-w", "-ldflags", "-s", dir)
-}
-
-// RunLint runs go lint for all modules
-func RunLint() error {
+// Lint runs go Lint for all modules
+func Lint() error {
 	return sh.RunV(deps.Golint.Bin, strings.Split("-set_exit_status ./...", " ")...)
 }
 
-// RunTest runs go test for all modules
-func RunTest() error {
+// Test runs go Test for all modules
+func Test() error {
 	return sh.RunV(mg.GoCmd(), "test", "./...", "-short", "-v", "-race",
 		"-coverprofile=coverage.out", "-covermode=atomic", "-tags=\"\"")
 }
 
-// RunVet runs go vet for all modules
-func RunVet() error {
+// Vet runs go Vet for all modules
+func Vet() error {
 	return sh.RunV(mg.GoCmd(), "vet", "./...")
 }
