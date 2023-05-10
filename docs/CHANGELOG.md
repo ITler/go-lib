@@ -1,3 +1,10 @@
+## [1.5.16](https://github.com/ITler/go-lib/compare/v1.5.15...v1.5.16) (2023-05-10)
+
+
+### Bug Fixes
+
+* better abstract mage code for re-usability ([1b26b58](https://github.com/ITler/go-lib/commit/1b26b5895b505bc3c3a5477c2d3f87d882dda153))
+
 ## [1.5.15](https://github.com/ITler/go-lib/compare/v1.5.14...v1.5.15) (2023-05-09)
 
 
