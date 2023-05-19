@@ -9,7 +9,7 @@ require (
 	github.com/google/go-github/v49 v49.1.0
 	github.com/magefile/mage v1.15.0
 	github.com/rs/zerolog v1.29.1
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.3
 	golang.org/x/oauth2 v0.8.0
 )
 
