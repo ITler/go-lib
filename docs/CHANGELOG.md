@@ -1,3 +1,10 @@
+## [1.5.21](https://github.com/ITler/go-lib/compare/v1.5.20...v1.5.21) (2023-05-30)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/stretchr/testify to v1.8.4 ([ff03efc](https://github.com/ITler/go-lib/commit/ff03efcf4eb89ff26f2c16972fffbe5eed53fb0f))
+
 ## [1.5.20](https://github.com/ITler/go-lib/compare/v1.5.19...v1.5.20) (2023-05-21)
 
 
