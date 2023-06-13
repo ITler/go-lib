@@ -1,3 +1,10 @@
+## [1.5.23](https://github.com/ITler/go-lib/compare/v1.5.22...v1.5.23) (2023-06-13)
+
+
+### Bug Fixes
+
+* **deps:** update module golang.org/x/oauth2 to v0.9.0 ([595a4da](https://github.com/ITler/go-lib/commit/595a4da4ab17d05b062a71a618bae041eeccff06))
+
 ## [1.5.22](https://github.com/ITler/go-lib/compare/v1.5.21...v1.5.22) (2023-06-04)
 
 
