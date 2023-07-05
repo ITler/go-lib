@@ -5,6 +5,10 @@ var (
 	Docker = &Dependency{
 		Bin: "docker",
 	}
+	// Yamllint describes the yamllint dependency
+	Yamllint = &Dependency{
+		Bin: "yamllint",
+	}
 	// Golint describes the golint dependency
 	Golint = &Dependency{
 		Bin:       "golint",
