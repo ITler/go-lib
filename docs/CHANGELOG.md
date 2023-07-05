@@ -1,3 +1,10 @@
+## [1.5.24](https://github.com/ITler/go-lib/compare/v1.5.23...v1.5.24) (2023-07-05)
+
+
+### Bug Fixes
+
+* add yamllint to known dependencies ([7cf2167](https://github.com/ITler/go-lib/commit/7cf21674ea53d4c4f556ff8274cc0e9a03c3abc4))
+
 ## [1.5.23](https://github.com/ITler/go-lib/compare/v1.5.22...v1.5.23) (2023-06-13)
 
 
