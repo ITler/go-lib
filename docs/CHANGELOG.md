@@ -1,3 +1,10 @@
+## [1.5.26](https://github.com/ITler/go-lib/compare/v1.5.25...v1.5.26) (2023-07-30)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/rs/zerolog to v1.30.0 ([90f6d3b](https://github.com/ITler/go-lib/commit/90f6d3bfac82d855855224c74032f7abcf65d8f1))
+
 ## [1.5.25](https://github.com/ITler/go-lib/compare/v1.5.24...v1.5.25) (2023-07-06)
 
 
