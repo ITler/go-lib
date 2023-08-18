@@ -1,3 +1,10 @@
+## [1.5.30](https://github.com/ITler/go-lib/compare/v1.5.29...v1.5.30) (2023-08-18)
+
+
+### Bug Fixes
+
+* upgrade node-based dev tools ([1b3a8f4](https://github.com/ITler/go-lib/commit/1b3a8f4392b690e14342bc827730b397238f4b74))
+
 ## [1.5.29](https://github.com/ITler/go-lib/compare/v1.5.28...v1.5.29) (2023-08-17)
 
 
