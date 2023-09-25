@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/validator/v10 v10.15.4
 	github.com/google/go-github/v49 v49.1.0
 	github.com/magefile/mage v1.15.0
-	github.com/rs/zerolog v1.30.0
+	github.com/rs/zerolog v1.31.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/oauth2 v0.12.0
 )
@@ -20,7 +20,7 @@ require (
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.18 // indirect
+	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
 	golang.org/x/net v0.15.0 // indirect
