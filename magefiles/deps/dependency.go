@@ -15,69 +15,104 @@ var (
 	// ExternalDependencies define the external app dependencies needed
 	// to fullfill all automation tasks
 	ExternalDependencies = []*Dependency{
-		Golint,
+		// Golint,
 	}
 )
 
-// Installable describes something that can be installed
-type Installable interface {
-	Install() error
-}
-
 // Dependency encapsulates attributes of a depending application
 type Dependency struct {
-	Bin       string
-	GoInstall string
+	Bin            string
+	InstallMethods []InstallMethod
+	InstallCmdF    []InstallCmdF
 }
 
-// Install will install the dependency
-func (d *Dependency) Install(ctx context.Context) (result bool, err error) {
-	if err = CheckDependencies(ctx, d); err != nil {
-		if os.IsNotExist(err) {
-			return InstallDependencies(ctx, d)
-		}
-		return true, nil
+func (o *Dependency) Check() error {
+	return checkDependency(o)
+}
+
+func (o *Dependency) Install(ctx context.Context) error {
+	return installDependency(ctx, o)
+}
+
+func (o *Dependency) Via(meths ...InstallMethod) Installable {
+	if meths != nil {
+		o.InstallMethods = append(o.InstallMethods, meths...)
 	}
-	return false, nil
+
+	return o
 }
 
-// CheckDependencies determines if provided dependencies are available.
+// Check determines if provided dependencies are available.
 // If binary is not available [os.ErrNotExist] is returned
-func CheckDependencies(ctx context.Context, dependencies ...*Dependency) error {
-	if dependencies == nil || len(dependencies) == 0 {
-		dependencies = ExternalDependencies
-	}
-	for _, dep := range dependencies {
-		if _, err := exec.LookPath(dep.Bin); err != nil {
-			if errors.Is(err, exec.ErrNotFound) {
-				return &os.PathError{
-					Path: dep.Bin,
-					Err:  os.ErrNotExist,
-				}
-			}
+func Check(ctx context.Context, dependencies ...*Dependency) error {
+	for _, dep := range ensureDependencies(dependencies...) {
+		if err := dep.Check(); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-// InstallDependencies makes sure to install provided dependencies
-// and return if all installing all dependencies were successful
-func InstallDependencies(ctx context.Context, dependencies ...*Dependency) (bool, error) {
-	var warnings error
-	if dependencies == nil || len(dependencies) == 0 {
-		dependencies = ExternalDependencies
-	}
-	for _, dep := range dependencies {
-		if dep.GoInstall != "" {
-			if err := sh.RunV(mg.GoCmd(), "install", dep.GoInstall); err != nil {
-				return false, fmt.Errorf("Dependency cannot be installed: %w", err)
+func checkDependency(dep *Dependency) error {
+	if _, err := exec.LookPath(dep.Bin); err != nil {
+		if errors.Is(err, exec.ErrNotFound) {
+			return &os.PathError{
+				Path: dep.Bin,
+				Err:  os.ErrNotExist,
 			}
+		}
+		return err
+	}
+	return nil
+}
+
+// InstallIfMissing makes sure to install provided dependencies
+// and return if all installing all dependencies were successful
+func InstallIfMissing(ctx context.Context, dependencies ...*Dependency) (bool, error) {
+	for _, dep := range ensureDependencies(dependencies...) {
+		if err := dep.Check(); err != nil {
+			if os.IsNotExist(err) {
+				if err = dep.Install(ctx); err != nil {
+					return false, err
+				}
+			} else {
+				return false, err
+			}
+		}
+	}
+	return true, nil
+}
+
+func Install(ctx context.Context, dependencies ...*Dependency) (bool, error) {
+	var warnings error
+
+	for _, dep := range ensureDependencies(dependencies...) {
+		if len(dep.InstallMethods) == 0 {
+			warnings = errors.Join(warnings, fmt.Errorf(
+				"Installation of '%s' not supported, yet. "+
+					"Thus installation needs to be handled, externally", dep.Bin))
 			continue
 		}
-
-		warnings = errors.Join(warnings, fmt.Errorf("Installation of '%s' not supported, yet. "+
-			"Thus installation needs to be handled, externally", dep.Bin))
+		if err := dep.Install(ctx); err != nil {
+			return false, err
+		}
 	}
 	return true, warnings
+}
+
+func installDependency(ctx context.Context, dep *Dependency) error {
+	if dep.GoInstall != "" {
+		if err := sh.RunV(mg.GoCmd(), "install", dep.GoInstall); err != nil {
+			return fmt.Errorf("Dependency install: %w", err)
+		}
+	}
+
+	return nil
+}
+
+func ensureDependencies(deps ...*Dependency) []*Dependency {
+	if deps == nil || len(deps) == 0 {
+		deps = ExternalDependencies
+	}
+	return deps
 }
