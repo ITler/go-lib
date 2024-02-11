@@ -1,3 +1,10 @@
+## [1.5.45](https://github.com/ITler/go-lib/compare/v1.5.44...v1.5.45) (2024-02-11)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/go-playground/validator/v10 to v10.18.0 ([16670af](https://github.com/ITler/go-lib/commit/16670afb536bc4377de943fac8ecb9d97b2c1fe8))
+
 ## [1.5.44](https://github.com/ITler/go-lib/compare/v1.5.43...v1.5.44) (2024-02-08)
 
 
