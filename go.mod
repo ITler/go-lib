@@ -1,12 +1,15 @@
 module github.com/itler/go-lib
 
-go 1.20
+go 1.21
+
+toolchain go1.22.1
 
 require (
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/google/go-github/v49 v49.1.0
+	github.com/google/go-github/v60 v60.0.0
 	github.com/magefile/mage v1.15.0
 	github.com/rs/zerolog v1.32.0
 	github.com/stretchr/testify v1.9.0
