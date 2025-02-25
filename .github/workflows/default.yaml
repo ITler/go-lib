@@ -31,7 +31,7 @@ jobs:
           check-latest: true
           cache: true
       - name: Install mage
-        uses: magefile/mage-action@v2
+        uses: magefile/mage-action@v3
         with:
           version: latest
       - name: Check for CI dependency installation routine
@@ -43,12 +43,12 @@ jobs:
           echo "task=$(mage -l | grep -o '  ci' | tr -d ' ')" >> $GITHUB_OUTPUT
       - name: Install CI dependencies with mage
         if: ${{ steps.checkCiDeps.outputs.task == 'ci' }}
-        uses: magefile/mage-action@v2
+        uses: magefile/mage-action@v3
         with:
           version: latest
           args: "ci"
       - name: Test with mage
-        uses: magefile/mage-action@v2
+        uses: magefile/mage-action@v3
         with:
           version: latest
           args: test
