@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.25.0
 	github.com/google/go-github/v49 v49.1.0
 	github.com/magefile/mage v1.15.0
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.34.0
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/oauth2 v0.28.0
 )
