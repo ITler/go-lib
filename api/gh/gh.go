@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/google/go-github/v49/github"
+	"github.com/google/go-github/v70/github"
 	"github.com/itler/go-lib/api"
 	"github.com/itler/go-lib/api/oauth2"
 )
