@@ -1,3 +1,10 @@
+## [1.5.70](https://github.com/ITler/go-lib/compare/v1.5.69...v1.5.70) (2025-03-31)
+
+
+### Bug Fixes
+
+* update github dep ([95d02ee](https://github.com/ITler/go-lib/commit/95d02eef88710ae75085de4fa1e004cd15bdb5cb))
+
 ## [1.5.69](https://github.com/ITler/go-lib/compare/v1.5.68...v1.5.69) (2025-03-28)
 
 
