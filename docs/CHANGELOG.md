@@ -1,3 +1,10 @@
+## [1.5.73](https://github.com/ITler/go-lib/compare/v1.5.72...v1.5.73) (2025-05-15)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/google/go-github/v70 to v72 ([28d4008](https://github.com/ITler/go-lib/commit/28d40084face76bc445deae1439e724bb7a1e93d))
+
 ## [1.5.72](https://github.com/ITler/go-lib/compare/v1.5.71...v1.5.72) (2025-05-05)
 
 
