@@ -1,3 +1,10 @@
+## [1.5.74](https://github.com/ITler/go-lib/compare/v1.5.73...v1.5.74) (2025-05-15)
+
+
+### Bug Fixes
+
+* use go-github v72 ([f54d907](https://github.com/ITler/go-lib/commit/f54d90742de7d911854bd012f326c2495e9ef700))
+
 ## [1.5.73](https://github.com/ITler/go-lib/compare/v1.5.72...v1.5.73) (2025-05-15)
 
 
