@@ -11,7 +11,7 @@ require (
 	github.com/google/go-github/v72 v72.0.0
 	github.com/magefile/mage v1.15.0
 	github.com/rs/zerolog v1.34.0
-	github.com/stretchr/testify v1.11.0
+	github.com/stretchr/testify v1.11.1
 	golang.org/x/oauth2 v0.30.0
 )
 
