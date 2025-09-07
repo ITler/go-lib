@@ -1,6 +1,6 @@
 module github.com/itler/go-lib
 
-go 1.23.0
+go 1.24.0
 
 toolchain go1.25.0
 
@@ -12,7 +12,7 @@ require (
 	github.com/magefile/mage v1.15.0
 	github.com/rs/zerolog v1.34.0
 	github.com/stretchr/testify v1.11.1
-	golang.org/x/oauth2 v0.30.0
+	golang.org/x/oauth2 v0.31.0
 )
 
 require (
