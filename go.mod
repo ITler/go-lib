@@ -7,7 +7,7 @@ toolchain go1.25.5
 require (
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
-	github.com/go-playground/validator/v10 v10.30.0
+	github.com/go-playground/validator/v10 v10.30.1
 	github.com/google/go-github/v72 v72.0.0
 	github.com/magefile/mage v1.15.0
 	github.com/rs/zerolog v1.34.0
