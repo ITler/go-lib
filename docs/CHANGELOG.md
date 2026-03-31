@@ -1,3 +1,10 @@
+## [1.5.93](https://github.com/ITler/go-lib/compare/v1.5.92...v1.5.93) (2026-03-31)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/magefile/mage to v1.17.1 ([#431](https://github.com/ITler/go-lib/issues/431)) ([9915a0f](https://github.com/ITler/go-lib/commit/9915a0fcaea1ed99a3e5a4493c1a9c0230bb5506))
+
 ## [1.5.92](https://github.com/ITler/go-lib/compare/v1.5.91...v1.5.92) (2026-03-31)
 
 
