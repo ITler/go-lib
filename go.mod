@@ -9,7 +9,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.30.2
 	github.com/google/go-github/v72 v72.0.0
-	github.com/magefile/mage v1.17.0
+	github.com/magefile/mage v1.17.1
 	github.com/rs/zerolog v1.35.0
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/oauth2 v0.36.0
