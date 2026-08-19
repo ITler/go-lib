@@ -2,7 +2,7 @@ module github.com/itler/go-lib
 
 go 1.25.0
 
-toolchain go1.26.6
+toolchain go1.26.7
 
 require (
 	github.com/go-playground/locales v0.14.1
