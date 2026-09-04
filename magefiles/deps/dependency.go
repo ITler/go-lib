@@ -26,8 +26,13 @@ type Installable interface {
 
 // Dependency encapsulates attributes of a depending application
 type Dependency struct {
-	Bin       string
-	GoInstall string
+	Bin string
+	// GoInstall holds the arguments passed to `go install` (build flags + package path).
+	// Example: []string{"-tags", "extended", "github.com/gohugoio/hugo@latest"}
+	GoInstall []string
+	// Env holds optional environment variables set when running go install.
+	// Example: map[string]string{"CGO_ENABLED": "1"}
+	Env map[string]string
 }
 
 // Install will install the dependency
@@ -69,8 +74,9 @@ func InstallDependencies(ctx context.Context, dependencies ...*Dependency) (bool
 		dependencies = ExternalDependencies
 	}
 	for _, dep := range dependencies {
-		if dep.GoInstall != "" {
-			if err := sh.RunV(mg.GoCmd(), "install", dep.GoInstall); err != nil {
+		if len(dep.GoInstall) > 0 {
+			args := append([]string{"install"}, dep.GoInstall...)
+			if err := sh.RunWithV(dep.Env, mg.GoCmd(), args...); err != nil {
 				return false, fmt.Errorf("Dependency cannot be installed: %w", err)
 			}
 			continue
