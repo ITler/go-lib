@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/ITler/go-lib/compare/v1.5.99...v1.6.0) (2026-09-04)
+
+
+### Features
+
+* dependencies allow setting ENV VARS ([0161fa8](https://github.com/ITler/go-lib/commit/0161fa880d36ceecf8a2af705102adf0bba38173))
+
 ## [1.5.99](https://github.com/ITler/go-lib/compare/v1.5.98...v1.5.99) (2026-09-03)
 
 
