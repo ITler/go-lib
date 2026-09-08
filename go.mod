@@ -10,7 +10,7 @@ require (
 	github.com/magefile/mage v1.17.2
 	github.com/rs/zerolog v1.35.1
 	github.com/stretchr/testify v1.12.1
-	golang.org/x/oauth2 v0.36.0
+	golang.org/x/oauth2 v0.37.0
 )
 
 require (
