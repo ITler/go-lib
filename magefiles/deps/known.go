@@ -25,4 +25,18 @@ var (
 		Env:       map[string]string{"CGO_ENABLED": "1"},
 		GoInstall: []string{"-tags", "extended", "github.com/gohugoio/hugo@latest"},
 	}
+	// DartSass describes the Dart Sass dependency (https://sass-lang.com).
+	// Version is intentionally unset — the latest published release is resolved
+	// automatically via the GitHub API. Pin it in consumer code when reproducibility
+	// is required:
+	//
+	//	deps.DartSass.GithubRelease.Version = "1.103.1"
+	DartSass = &Dependency{
+		Bin: "sass",
+		GithubRelease: &GithubRelease{
+			Repo:         "sass/dart-sass",
+			AssetPattern: "dart-sass-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz",
+			BinPath:      "dart-sass/sass",
+		},
+	}
 )
