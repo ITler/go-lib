@@ -36,7 +36,7 @@ var (
 		GithubRelease: &GithubRelease{
 			Repo:         "sass/dart-sass",
 			AssetPattern: "dart-sass-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz",
-			TreePath:     "dart-sass",
+			BundleDir:    "dart-sass",
 			BinPath:      "dart-sass/sass",
 		},
 	}
