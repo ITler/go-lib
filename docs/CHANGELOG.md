@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/ITler/go-lib/compare/v1.6.0...v1.7.0) (2026-09-08)
+
+
+### Features
+
+* **deps:** support GitHub Release binary installs ([89b7e05](https://github.com/ITler/go-lib/commit/89b7e058163d454508dc0ffa2971686ffcb6ab14))
+
 # [1.6.0](https://github.com/ITler/go-lib/compare/v1.5.99...v1.6.0) (2026-09-04)
 
 
