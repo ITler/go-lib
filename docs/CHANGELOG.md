@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/ITler/go-lib/compare/v1.7.0...v1.7.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **deps:** install full Dart Sass tree instead of single binary ([e65b1eb](https://github.com/ITler/go-lib/commit/e65b1eb3fe4874a8ad8d8afafe3dda9cd16c96a7))
+
 # [1.7.0](https://github.com/ITler/go-lib/compare/v1.6.0...v1.7.0) (2026-09-08)
 
 
