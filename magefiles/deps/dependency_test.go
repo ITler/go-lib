@@ -62,7 +62,7 @@ func TestMapArch(t *testing.T) {
 
 // --- GithubRelease: asset name template rendering ---
 
-func TestRenderTemplate(t *testing.T) {
+func TestRenderAssetName(t *testing.T) {
 	tests := []struct {
 		pattern string
 		data    ReleaseAssetData
@@ -85,19 +85,19 @@ func TestRenderTemplate(t *testing.T) {
 		},
 	}
 	for _, tc := range tests {
-		got, err := renderTemplate(tc.pattern, tc.data)
+		got, err := renderAssetName(tc.pattern, tc.data)
 		if err != nil {
-			t.Errorf("renderTemplate(%q, %v) unexpected error: %v", tc.pattern, tc.data, err)
+			t.Errorf("renderAssetName(%q, %v) unexpected error: %v", tc.pattern, tc.data, err)
 			continue
 		}
 		if got != tc.want {
-			t.Errorf("renderTemplate(%q, %v) = %q, want %q", tc.pattern, tc.data, got, tc.want)
+			t.Errorf("renderAssetName(%q, %v) = %q, want %q", tc.pattern, tc.data, got, tc.want)
 		}
 	}
 }
 
-func TestRenderTemplate_InvalidTemplate(t *testing.T) {
-	_, err := renderTemplate("{{.Unclosed", ReleaseAssetData{})
+func TestRenderAssetName_InvalidTemplate(t *testing.T) {
+	_, err := renderAssetName("{{.Unclosed", ReleaseAssetData{})
 	if err == nil {
 		t.Fatal("expected error for invalid template, got nil")
 	}
