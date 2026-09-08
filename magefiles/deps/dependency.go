@@ -47,10 +47,17 @@ type GithubRelease struct {
 	// AssetPattern is a Go text/template applied to [ReleaseAssetData] to produce
 	// the asset filename. Example: "dart-sass-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
 	AssetPattern string
-	// BinPath is the relative path inside the extracted archive to the binary.
+	// BinPath is the relative path inside the extracted archive to the executable.
 	// Example: "dart-sass/sass"
+	// When TreePath is set, BinPath is also used to derive the symlink name placed in InstallDir.
 	BinPath string
-	// InstallDir is the directory where the binary is placed.
+	// TreePath is an optional subdirectory inside the archive that must be installed as a whole
+	// tree (e.g. when the binary is a wrapper script that references sibling files).
+	// When set, the entire subtree is copied to <InstallDir>/<TreePath> and a symlink is created
+	// at <InstallDir>/<Dependency.Bin> → <InstallDir>/<BinPath>.
+	// Example: "dart-sass"  (copies dart-sass/{sass,src/dart,src/sass.snapshot})
+	TreePath string
+	// InstallDir is the directory where the binary (or tree) is placed.
 	// Defaults to $GOPATH/bin, then $HOME/.local/bin.
 	InstallDir string
 }
@@ -202,6 +209,23 @@ func installFromGithubRelease(ctx context.Context, dep *Dependency) error {
 	}
 	if err := os.MkdirAll(installDir, 0755); err != nil {
 		return fmt.Errorf("create install dir %s: %w", installDir, err)
+	}
+
+	if gr.TreePath != "" {
+		// Copy the whole tree so wrapper scripts can resolve sibling files.
+		srcTree := filepath.Join(extractDir, filepath.FromSlash(gr.TreePath))
+		destTree := filepath.Join(installDir, filepath.FromSlash(gr.TreePath))
+		if err := copyTree(srcTree, destTree); err != nil {
+			return fmt.Errorf("install tree to %s: %w", destTree, err)
+		}
+		// Symlink <installDir>/<bin> → <installDir>/<BinPath>
+		destBin := filepath.Join(installDir, dep.Bin)
+		destBinTarget := filepath.Join(installDir, filepath.FromSlash(gr.BinPath))
+		_ = os.Remove(destBin) // remove stale symlink if present
+		if err := os.Symlink(destBinTarget, destBin); err != nil {
+			return fmt.Errorf("create symlink %s → %s: %w", destBin, destBinTarget, err)
+		}
+		return nil
 	}
 
 	destBin := filepath.Join(installDir, dep.Bin)
@@ -432,4 +456,23 @@ func copyFile(src, dest string, mode os.FileMode) error {
 
 	_, err = io.Copy(out, in)
 	return err
+}
+
+// copyTree recursively copies the directory tree rooted at src into dest,
+// preserving file permission bits.
+func copyTree(src, dest string) error {
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		rel, err := filepath.Rel(src, path)
+		if err != nil {
+			return err
+		}
+		target := filepath.Join(dest, rel)
+		if info.IsDir() {
+			return os.MkdirAll(target, info.Mode())
+		}
+		return copyFile(path, target, info.Mode())
+	})
 }
