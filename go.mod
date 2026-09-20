@@ -4,7 +4,7 @@ go 1.27.1
 
 require (
 	github.com/go-playground/locales v0.14.1
-	github.com/go-playground/universal-translator v0.18.1
+	github.com/go-playground/universal-translator v0.18.2
 	github.com/go-playground/validator/v10 v10.30.5
 	github.com/google/go-github/v72 v72.0.0
 	github.com/magefile/mage v1.17.2
