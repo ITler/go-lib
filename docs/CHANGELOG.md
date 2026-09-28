@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/ITler/go-lib/compare/v1.7.4...v1.7.5) (2026-09-28)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/go-playground/locales to v0.14.2 ([#505](https://github.com/ITler/go-lib/issues/505)) ([75cb72b](https://github.com/ITler/go-lib/commit/75cb72b1f4196734368b27360d6fc4b377b949e6))
+
 ## [1.7.4](https://github.com/ITler/go-lib/compare/v1.7.3...v1.7.4) (2026-09-20)
 
 
